@@ -1,7 +1,6 @@
-import React from "react"; 
-import { useState } from 'react'
+import React from "react";
+import { useState, useEffect } from "react";
 import ContactRow from "./ContactRow";
-
 
 export const dummyContacts = [
   { id: 1, name: "R2-D2", phone: "222-222-2222", email: "r2d2@droids.com" },
@@ -9,26 +8,39 @@ export const dummyContacts = [
   { id: 3, name: "BB-8", phone: "888-888-8888", email: "bb8@droids.com" },
 ];
 
-export default function ContactList() { 
+export default function ContactList() {
   const [contacts, setContacts] = useState(dummyContacts);
-  return ( 
-        <table>
-          <thead>
-            <tr>
-              <th colSpan="3">Contact List</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Name</td>
-              <td>Email</td>
-              <td>Phone</td>
-            </tr>
-            {contacts.map((contact) => {
-              return <ContactRow key={contact.id} contact={contact} />;
-            })}
-          </tbody>
-        </table>
-    ); 
+  useEffect(() => {
+    async function fetchContacts() {
+      try {
+        const response = await fetch(
+          "https://jsonplace-univclone.herokuapp.com/users"
+        );
+        const result = await response.json();
+        console.log(result);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    fetchContacts();
+  }, []);
+  return (
+    <table>
+      <thead>
+        <tr>
+          <th colSpan="3">Contact List</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Name</td>
+          <td>Email</td>
+          <td>Phone</td>
+        </tr>
+        {contacts.map((contact) => {
+          return <ContactRow key={contact.id} contact={contact} />;
+        })}
+      </tbody>
+    </table>
+  );
 }
-
