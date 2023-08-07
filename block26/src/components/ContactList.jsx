@@ -14,10 +14,11 @@ export default function ContactList() {
     async function fetchContacts() {
       try {
         const response = await fetch(
-          "https://jsonplace-univclone.herokuapp.com/users"
+          "https://fsa-jsonplaceholder-69b5c48f1259.herokuapp.com/users"
         );
         const result = await response.json();
-        console.log(result);
+        setContacts(result);
+        console.log(contacts);
       } catch (error) {
         console.error(error);
       }
