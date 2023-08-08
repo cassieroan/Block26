@@ -7,7 +7,7 @@ export default function SelectedContact({
   selectedContactId,
   setSelectedContactId,
 }) {
-  const [contact, setContact] = useState(null);
+  const [contact, setContact] = useState({});
 
   useEffect(() => {
     async function fetchContact() {
@@ -30,30 +30,31 @@ export default function SelectedContact({
   }
 
   return (
-    <table>
-      <thead>
-        <tr>
-          <th
-            colSpan="3"
-            onClick={() => {
-              setSelectedContactId(null);
-            }}
-          >
-            Contact List
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Name</td>
-          <td>Email</td>
-          <td>Phone</td>
-        </tr>
-        <ContactRow
-          contact={contact}
-          setSelectedContactId={setSelectedContactId}
-        />
-      </tbody>
-    </table>
+    <div id="selected-contact">
+      <h2>Contact</h2>
+      <p>
+        <b>Name:</b> {contact.name}
+      </p>
+      <p>
+        <b>Email:</b> {contact.email}
+      </p>
+      <p>
+        <b>Phone:</b> {contact.phone}
+      </p>
+      <div>
+        <b>Address:</b>
+        <p>{contact.address?.street}</p>
+        <p>{contact.address?.city}</p>
+        <p>{contact.address?.zipcode}</p>
+      </div>
+      <button
+        className="return-to-contacts"
+        onClick={() => {
+          setSelectedContactId(null);
+        }}
+      >
+        Return to Contact List
+      </button>
+    </div>
   );
 }

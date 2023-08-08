@@ -44,6 +44,22 @@ th {
 
 td {
   background-color:#b9bcf3;
+  padding: 10px;
+}
+
+h2 {
+  background-color:#b9bcf3;
+
+
+}
+
+#selected-contact {
+  background-color:#b9bcf3;
+  padding: 10px;
+}
+
+.return-to-contacts {
+  background-color:#9a9ff5;
 
 }
 
